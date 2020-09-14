@@ -1,7 +1,7 @@
 import React from "react";
 import {View} from "react-native";
 import {Caption, Headline, Subheading, Text, Title} from 'react-native-paper'
-import theme from "../../../utilities/styling/index";
+import theme from "../../utilities/styling";
 
 
 export const TextComponent = (props) => (

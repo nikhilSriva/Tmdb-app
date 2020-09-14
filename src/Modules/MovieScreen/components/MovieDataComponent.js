@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, _, Text} from 'components';
+import {StyleSheet, View} from 'components';
 import {FlatList, RefreshControl} from 'react-native';
 import MovieCard from "./MovieCard";
 
@@ -7,7 +7,7 @@ let styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white',
-        paddingVertical:2
+        paddingVertical: 2
     },
     textInput: {
         flex: 1,
@@ -27,16 +27,15 @@ class MovieDataComponent extends React.Component {
     }
 
     refreshData = () => {
-        this.props.refreshData(this.props.inviteType);
+        this.props.fetchMoreData();
     };
     _onEndReached = (distanceFromEnd) => {
         if (distanceFromEnd >= 0) {
-            this.props.state.next && this.props.refreshData(this.props.inviteType, this.props.state.next);
+            this.props.fetchMoreData();
         }
     };
 
     render() {
-        console.log('da', this.props.data)
         return (
             <View style={styles.container}>
                 <FlatList

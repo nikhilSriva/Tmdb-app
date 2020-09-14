@@ -36,7 +36,7 @@ import {
     TextComponent as Text,
     TextComponent,
     TitleComponent as Title
-} from './basicComponents/text';
+} from './Text';
 import {ActivityIndicator, FAB} from 'react-native-paper'
 import * as _ from 'lodash';
 import theme from '../utilities/styling';
