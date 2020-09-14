@@ -17,7 +17,7 @@ export default class TvShowScreen extends React.Component {
 
     fetchData = async (page = this.state.currentPage) => {
         try {
-            this.setState({loading: true});
+                this.setState({loading: true});
             let data = await getData('tv', page, this.state)
             console.log(data)
             this.setState({
@@ -34,6 +34,17 @@ export default class TvShowScreen extends React.Component {
         this.fetchData()
     }
 
+    handleFetchMoreData = (action) => {
+        if (action !== 'refresh')
+            this.setState((state) => ({
+                currentPage: state.currentPage + 1
+            }), () => this.fetchData(this.state.currentPage));
+        else
+            this.setState((state) => ({
+                currentPage: 1
+            }), () => this.fetchData(this.state.currentPage));
+    }
+
     render() {
         return (
             <View style={{flex: 1}}>
@@ -42,11 +53,8 @@ export default class TvShowScreen extends React.Component {
 
                     !isEmpty(this.state.data) &&
                     <TvShowDataComponent
-                        fetchMoreData={() => {
-                            this.setState((state) => ({
-                                currentPage: state.currentPage + 1
-                            }), () => this.fetchData(this.state.currentPage));
-                        }}
+                        refreshing={this.state.loading}
+                        fetchMoreData={(action) => this.handleFetchMoreData(action)}
                         currentPage={this.state.currentPage}
                         data={this.state.data}/>
 

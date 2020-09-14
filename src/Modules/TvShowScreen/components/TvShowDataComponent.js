@@ -8,26 +8,17 @@ let styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         paddingVertical: 2
-    },
-    textInput: {
-        flex: 1,
-        marginHorizontal: 30,
-        maxHeight: 55,
-        backgroundColor: 'white',
-        padding: 0,
-    },
+    }
 });
 
 class TvShowDataComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            sentInvites: [],
-        };
+        this.state = {};
     }
 
     refreshData = () => {
-        this.props.fetchMoreData();
+        this.props.fetchMoreData('refresh');
     };
     _onEndReached = (distanceFromEnd) => {
         if (distanceFromEnd >= 0) {
