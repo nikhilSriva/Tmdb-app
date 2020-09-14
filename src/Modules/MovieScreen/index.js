@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View} from 'components';
+import {StyleSheet, Text, View} from 'components';
 import {getData} from "../../utilities/network/requests";
 import {isEmpty} from 'lodash'
 import MovieDataComponent from "./components/MovieDataComponent";
@@ -15,17 +15,22 @@ export default class MovieScreen extends React.Component {
         }
     }
 
-    fetchData = async (page = this.state.currentPage) => {
+    fetchData = async (page = this.state.currentPage, isRefreshing) => {
         try {
-            this.setState({loading: true});
-            let data = await getData('movie', page, this.state)
+
+            !isRefreshing && this.setState({loading: true});
+            let data = await getData('movie', page, this.state);
             this.setState({
                 data,
                 showSnackBar: true,
                 loading: false,
             })
         } catch (error) {
-            this.setState({loading: false})
+
+            //Implement Bug Monitoring tools
+            this.setState({loading: false});
+            if (error.response.status === 404)
+                this.setState({apiError: 'Could not find data'})
         }
     };
 
@@ -41,7 +46,38 @@ export default class MovieScreen extends React.Component {
         else
             this.setState((state) => ({
                 currentPage: 1
-            }), () => this.fetchData(this.state.currentPage));
+            }), () => this.fetchData(this.state.currentPage, true));
+    };
+    renderBottomPopups = () => {
+        if (this.state.apiError)
+            return (<Snackbar
+                duration={1500}
+                style={[styles.snackbar, {
+                    borderColor: '#cb2424', maxWidth: '65%',
+                    flexDirection: 'row'
+                }]}
+                visible={this.state.apiError}
+                action={{
+                    label: 'Retry',
+                    onPress: () => {
+                        this.setState({apiError: null})
+                        this.fetchData()
+                    },
+                }}
+            >
+                <Text style={{color: '#cb2424', fontSize: 16}}>{this.state.apiError}</Text>
+            </Snackbar>)
+        return (<Snackbar
+            duration={1500}
+            style={styles.snackbar}
+            visible={this.state.showSnackBar}
+            onDismiss={() => {
+                this.setState({showSnackBar: false});
+            }}>
+            {
+                !isEmpty(this.state.data) &&
+                <Text style={{color: '#222', fontSize: 16}}>{this.state.data?.length} results found</Text>}
+        </Snackbar>)
     }
 
     render() {
@@ -57,27 +93,21 @@ export default class MovieScreen extends React.Component {
                         data={this.state.data}/>
 
                 }
-                <Snackbar
-                    duration={1500}
-                    style={{
-                        flexDirection: 'column',
-                        backgroundColor: 'white',
-                        elevation: 20,
-                        borderRadius: 100,
-                        alignSelf: 'center',
-                        borderColor: '#999',
-                        borderWidth: 0.4,
-                    }}
-                    visible={this.state.showSnackBar}
-                    onDismiss={() => {
-                        this.setState({showSnackBar: false});
-                    }}>
-                    {
-                        !isEmpty(this.state.data) &&
-                        <Text style={{color: '#222', fontSize: 16}}>{this.state.data?.length} results found</Text>}
-                </Snackbar>
+                {this.renderBottomPopups()}
 
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    snackbar: {
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        elevation: 20,
+        borderRadius: 100,
+        alignSelf: 'center',
+        borderColor: '#999',
+        borderWidth: 0.4,
+    }
+})
