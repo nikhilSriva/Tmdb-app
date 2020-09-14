@@ -37,3 +37,5 @@ export const TV_SHOW_GENRES = {
     "10767": "Talk",
     "10768": "War & Politics"
 }
+export const BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342";
+export const BASE_BACKDROP_PATH = "https://image.tmdb.org/t/p/w780";

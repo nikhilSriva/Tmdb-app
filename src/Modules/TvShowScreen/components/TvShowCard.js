@@ -1,11 +1,9 @@
 import React from 'react'
-import {Image, Text, View} from 'components';
+import {Image, Text, TouchableOpacity, View} from 'components';
 import {Caption, Subheading, theme, Title} from "../../../components";
 import AntIcon from 'react-native-vector-icons/AntDesign'
-import {TV_SHOW_GENRES} from "../../../utilities/constants";
-
-const BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342";
-const BASE_BACKDROP_PATH = "https://image.tmdb.org/t/p/w780";
+import {BASE_POSTER_PATH, TV_SHOW_GENRES} from "../../../utilities/constants";
+import {Actions} from "react-native-router-flux";
 
 const renderGenreTag = (genreArray) => {
     let genres = genreArray.slice(0, 3);
@@ -37,24 +35,26 @@ const renderGenreTag = (genreArray) => {
 };
 const TvShowCard = ({item}) => {
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            marginHorizontal: '2%',
-            marginVertical: '1%',
-            flexDirection: 'row',
-            elevation: 8,
-            shadowColor: '#999',
-            shadowOffset: {
-                width: 1,
-                height: 2,
-            },
-            shadowRadius: 2,
-            shadowOpacity: 0.6,
-            borderWidth: 0.2,
-            borderColor: '#999',
-        }}>
+        <TouchableOpacity
+            onPress={() => Actions.push('tvShowDetail', {item})}
+            style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                borderRadius: 10,
+                marginHorizontal: '2%',
+                marginVertical: '1%',
+                flexDirection: 'row',
+                elevation: 8,
+                shadowColor: '#999',
+                shadowOffset: {
+                    width: 1,
+                    height: 2,
+                },
+                shadowRadius: 2,
+                shadowOpacity: 0.6,
+                borderWidth: 0.2,
+                borderColor: '#999',
+            }}>
             <View style={{padding: '2%', justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                     style={{width: 100, height: 120, borderRadius: 10}}
@@ -89,7 +89,7 @@ const TvShowCard = ({item}) => {
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

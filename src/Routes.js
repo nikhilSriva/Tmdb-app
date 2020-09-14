@@ -1,9 +1,11 @@
 import React from 'react';
-import {Text, theme, View} from 'components';
-import {Router, Scene, Actions} from 'react-native-router-flux';
+import {Text} from 'components';
+import {Actions, Router, Scene} from 'react-native-router-flux';
 import MovieScreen from "./Modules/MovieScreen";
 import TvShowScreen from "./Modules/TvShowScreen";
 import {TouchableRipple} from "react-native-paper";
+import DetailScreen from "./Modules/MovieScreen/components/MovieDetail";
+import TvShowDetail from "./Modules/TvShowScreen/components/TvShowDetail";
 
 const TabIcon = ({selected, title}) => {
     return (
@@ -58,6 +60,16 @@ class Routes extends React.Component {
                         </Scene>
 
                     </Scene>
+                    <Scene
+                        key="movieDetail"
+                        component={DetailScreen}
+                        hideNavBar
+                    />
+                    <Scene
+                        key="tvShowDetail"
+                        component={TvShowDetail}
+                        hideNavBar
+                    />
                 </Scene>
             </Router>
         );

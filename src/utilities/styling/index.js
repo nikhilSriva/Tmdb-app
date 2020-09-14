@@ -8,7 +8,7 @@ export default {
             smallFontSize: 16,
             mediumFontSize: 20,
             largeFontSize: 22,
-            extraLargeFontSize: 26,
+            extraLargeFontSize: 24,
 
         }, ios: {
             extraSmallFontSize: 14,
