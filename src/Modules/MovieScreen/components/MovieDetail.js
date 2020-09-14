@@ -94,5 +94,6 @@ function timeConvert(n) {
     return rhours + "hr " + rminutes + "mins";
 }
 
+
 export default MovieDetail
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'components';
+import {StyleSheet, Text} from 'components';
 import {Actions, Router, Scene} from 'react-native-router-flux';
 import MovieScreen from "./Modules/MovieScreen";
 import TvShowScreen from "./Modules/TvShowScreen";
@@ -15,7 +15,10 @@ const TabIcon = ({selected, title}) => {
                 alignItems: 'center'
             }}
             onPress={() => {
-                Actions.replace('tvShowScreen')
+                if (title.indexOf('TV') >= 0)
+                    Actions.replace('tvShowScreen')
+                else
+                    Actions.replace('movieScreen')
             }}>
             <Text>{title}</Text>
         </TouchableRipple>
@@ -37,9 +40,10 @@ class Routes extends React.Component {
                     <Scene
                         key="tabbar"
                         tabs={true}
+
                         unmountScenes={true}
                         lazy={true}
-                        tabBarStyle={{backgroundColor: '#FFFFFF'}}
+                        tabBarStyle={styles.tabBar}
                     >
                         {/* Movie Tab */}
                         <Scene key="movieTab" title="Movies" icon={TabIcon}>
@@ -77,3 +81,12 @@ class Routes extends React.Component {
 }
 
 export default Routes
+const styles = StyleSheet.create({
+    tabBar: {
+        height: 50,
+        borderTopColor: 'darkgrey',
+        borderTopWidth: 1,
+        opacity: 0.98,
+        justifyContent: 'space-between'
+    }
+});

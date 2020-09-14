@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View} from 'components';
+import {StyleSheet, Text, View} from 'components';
 import {getData} from "../../utilities/network/requests";
 import {isEmpty} from 'lodash'
 import TvShowDataComponent from "./components/TvShowDataComponent";

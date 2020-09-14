@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Text, TouchableOpacity, View} from 'components';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'components';
 import {Caption, Subheading, theme, Title} from "../../../components";
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import {BASE_POSTER_PATH, MOVIE_GENRES} from "../../../utilities/constants";
@@ -12,17 +12,7 @@ const renderGenreTag = (genreArray) => {
             return (
                 <View
                     key={id}
-                    style={{
-                        flex: -1,
-                        paddingHorizontal: 5,
-                        margin: 5,
-                        flexDirection: 'row',
-                        backgroundColor: '#cecece',
-                        borderRadius: 9,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'flex-end'
-                    }}>
+                    style={styles.genrePill}>
                     <Caption>{MOVIE_GENRES[id]}</Caption>
                 </View>
             )
@@ -37,24 +27,7 @@ const MovieCard = ({item}) => {
     return (
         <TouchableOpacity
             onPress={() => Actions.push('movieDetail', {item})}
-            style={{
-                flex: 1,
-                backgroundColor: '#fff',
-                borderRadius: 10,
-                marginHorizontal: '2%',
-                marginVertical: '1%',
-                flexDirection: 'row',
-                elevation: 8,
-                shadowColor: '#999',
-                shadowOffset: {
-                    width: 1,
-                    height: 2,
-                },
-                shadowRadius: 2,
-                shadowOpacity: 0.6,
-                borderWidth: 0.2,
-                borderColor: '#999',
-            }}>
+            style={styles.card}>
             <View style={{padding: '2%', justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                     style={{width: 100, height: 120, borderRadius: 10}}
@@ -92,5 +65,37 @@ const MovieCard = ({item}) => {
         </TouchableOpacity>
     )
 }
+
+const styles = StyleSheet.create({
+    genrePill: {
+        flex: -1,
+        paddingHorizontal: 5,
+        margin: 5,
+        flexDirection: 'row',
+        backgroundColor: '#cecece',
+        borderRadius: 9,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'flex-end'
+    },
+    card: {
+        flex: 1,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        marginHorizontal: '2%',
+        marginVertical: '1%',
+        flexDirection: 'row',
+        elevation: 8,
+        shadowColor: '#999',
+        shadowOffset: {
+            width: 1,
+            height: 2,
+        },
+        shadowRadius: 2,
+        shadowOpacity: 0.6,
+        borderWidth: 0.2,
+        borderColor: '#999',
+    }
+})
 
 export default MovieCard
