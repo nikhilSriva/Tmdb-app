@@ -27,16 +27,15 @@ class TvShowDataComponent extends React.Component {
     }
 
     refreshData = () => {
-        this.props.refreshData(this.props.inviteType);
+        this.props.fetchMoreData();
     };
     _onEndReached = (distanceFromEnd) => {
         if (distanceFromEnd >= 0) {
-            this.props.state.next && this.props.refreshData(this.props.inviteType, this.props.state.next);
+            this.props.fetchMoreData();
         }
     };
 
     render() {
-        console.log('da', this.props.data)
         return (
             <View style={styles.container}>
                 <FlatList

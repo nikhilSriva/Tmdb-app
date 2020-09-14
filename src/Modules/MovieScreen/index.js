@@ -15,7 +15,7 @@ export default class MovieScreen extends React.Component {
         }
     }
 
-    fetchData = async (page = this.state.currentPage, fetchMoreData) => {
+    fetchData = async (page = this.state.currentPage) => {
         console.log('fetching for page', page)
         try {
             this.setState({loading: true});
@@ -46,7 +46,7 @@ export default class MovieScreen extends React.Component {
                         fetchMoreData={() => {
                             this.setState((state) => ({
                                 currentPage: state.currentPage + 1
-                            }), () => this.fetchData(this.state.currentPage, true));
+                            }), () => this.fetchData(this.state.currentPage));
                         }}
                         currentPage={this.state.currentPage}
                         data={this.state.data}/>
