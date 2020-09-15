@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from 'components';
+import {StyleSheet, Text, Title} from 'components';
 import {Actions, Router, Scene} from 'react-native-router-flux';
 import MovieScreen from "./Modules/MovieScreen";
 import TvShowScreen from "./Modules/TvShowScreen";
@@ -35,6 +35,8 @@ const TabIcon = React.memo(({selected, focused, title, ...props}) => {
     );
 })
 
+const TitleComponent = (props) => <Title style={{paddingHorizontal: "2%"}}>{props.title}</Title>
+
 class Routes extends React.Component {
     constructor(properties) {
         super(properties);
@@ -59,9 +61,8 @@ class Routes extends React.Component {
                         <Scene key="movieTab" title="Movies" icon={TabIcon}>
                             <Scene
                                 key="movieScreen"
-                                onEnter={() => console.log(this.movieScreenRef)}
                                 component={MovieScreen}
-                                ref={(el) => this.movieScreenRef = el}
+                                renderTitle={TitleComponent}
                             />
                         </Scene>
 
@@ -69,6 +70,7 @@ class Routes extends React.Component {
                         <Scene key="tvShowTab" title="TV Shows" icon={TabIcon}>
                             <Scene
                                 key="tvShowScreen"
+                                renderTitle={TitleComponent}
                                 component={TvShowScreen}
                             />
                         </Scene>

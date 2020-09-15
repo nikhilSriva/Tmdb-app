@@ -40,7 +40,7 @@ class TvShowDataComponent extends React.Component {
                     }}
                     refreshControl={
                         <RefreshControl
-                            refreshing={this.props.refreshing}
+                            // refreshing={this.props.refreshing}
                             onRefresh={this.refreshData}
                         />
                     }
