@@ -6,11 +6,30 @@ import {getResourceDetail} from "../../../utilities/network/requests";
 import moment from 'moment'
 import StarRating from "react-native-star-rating";
 
+
+let formatter;
 const {width: WIDTH, height: HEIGHT} = Dimensions.get('screen');
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
+if (Platform.OS !== 'android')
+    formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+else
+    Number.prototype.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+
+const getFormattedCurrency = (detail) => {
+    if (Platform.OS !== 'android')
+        return formatter.format(detail.budget)
+    else
+        return detail?.budget?.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        })
+};
 const MovieDetail = React.memo(({item}) => {
     const [detail, setDetail] = useState({})
 
@@ -73,7 +92,7 @@ const MovieDetail = React.memo(({item}) => {
                     </View>
                     <View>
                         <Headline style={{fontSize: 20}}>Budget</Headline>
-                        <Text style={{fontSize: 15}}>{formatter.format(detail.budget)}</Text>
+                        <Text style={{fontSize: 15}}>{getFormattedCurrency(detail)}</Text>
                     </View>
                 </View>
                 <View style={{flex: 1}}>

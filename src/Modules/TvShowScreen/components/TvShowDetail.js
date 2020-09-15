@@ -7,10 +7,6 @@ import moment from 'moment'
 import StarRating from "react-native-star-rating";
 
 const {width: WIDTH, height: HEIGHT} = Dimensions.get('screen');
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
 const TvShowDetail = React.memo(({item}) => {
     const [detail, setDetail] = useState({})
 
