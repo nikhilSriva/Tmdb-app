@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
         borderColor: '#999',
     }
 })
-export default TvShowCard
+export default React.memo(TvShowCard)

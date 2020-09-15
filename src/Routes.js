@@ -80,7 +80,7 @@ class Routes extends React.Component {
     }
 }
 
-export default Routes
+export default React.memo(Routes)
 const styles = StyleSheet.create({
     tabBar: {
         height: 50,
