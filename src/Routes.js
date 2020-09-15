@@ -6,24 +6,34 @@ import TvShowScreen from "./Modules/TvShowScreen";
 import {TouchableRipple} from "react-native-paper";
 import DetailScreen from "./Modules/MovieScreen/components/MovieDetail";
 import TvShowDetail from "./Modules/TvShowScreen/components/TvShowDetail";
+import MaterialCommIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
-const TabIcon = ({selected, title}) => {
+const TabIcon = React.memo(({selected, focused, title, ...props}) => {
+    let iconColor = focused ? '#018CCF' : '#222'
     return (
         <TouchableRipple
             style={{
+                backgroundColor: 'white',
                 justifyContent: 'center',
                 alignItems: 'center'
             }}
             onPress={() => {
                 if (title.indexOf('TV') >= 0)
-                    Actions.replace('tvShowScreen')
+                    Actions.replace('tvShowScreen');
                 else
                     Actions.replace('movieScreen')
             }}>
-            <Text>{title}</Text>
+
+            {
+                title.indexOf('TV') >= 0 ?
+                    <MaterialIcon name={'live-tv'} size={28} color={iconColor}/>
+                    :
+                    <MaterialCommIcon name={'movie-open'} size={28} color={iconColor}/>
+            }
         </TouchableRipple>
     );
-};
+})
 
 class Routes extends React.Component {
     constructor(properties) {
