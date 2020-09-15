@@ -19,7 +19,6 @@ export default class TvShowScreen extends React.Component {
         try {
             !isRefreshing && this.setState({loading: true});
             let data = await getData('tv', page, this.state)
-            console.log(data)
             this.setState({
                 data,
                 showSnackBar: true,
@@ -28,7 +27,7 @@ export default class TvShowScreen extends React.Component {
         } catch (error) {
             //Implement Bug Monitoring tools
             this.setState({loading: false, apiError: 'Something went wrong'});
-            if (error.response.status === 404)
+            if (error?.response?.status === 404)
                 this.setState({apiError: 'Could not find data'});
         }
     };
@@ -53,7 +52,7 @@ export default class TvShowScreen extends React.Component {
             return (<Snackbar
                 duration={1500}
                 style={[styles.snackbar, {
-                    borderColor: '#cb2424', maxWidth: '65%',
+                    borderColor: '#cb2424', maxWidth: '73%',
                     flexDirection: 'row'
                 }]}
                 visible={this.state.apiError}
@@ -63,6 +62,8 @@ export default class TvShowScreen extends React.Component {
                         this.setState({apiError: null})
                         this.fetchData()
                     },
+                }}
+                onDismiss={() => {
                 }}
             >
                 <Text style={{color: '#cb2424', fontSize: 16}}>{this.state.apiError}</Text>

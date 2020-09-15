@@ -42,6 +42,11 @@ const MovieDetail = React.memo(({item}) => {
 
         fetchDetails()
     }, []);
+    useEffect(() => {
+        return () => {
+            console.log("cleaned up");
+        };
+    }, []);
 
     return (
         <View style={{flex: 1}}>

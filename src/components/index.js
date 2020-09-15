@@ -39,13 +39,11 @@ import {
 } from './Text';
 import {ActivityIndicator, FAB} from 'react-native-paper'
 import theme from '../utilities/styling';
-import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export {
     TextComponent,
     theme,
-    connect,
     Switch,
     Share,
     ImageBackground,
